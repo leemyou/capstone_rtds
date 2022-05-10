@@ -1,11 +1,14 @@
 import React from "react";
 import { Link, BrowserRouter } from 'react-router-dom';
 
+import '../../css/navStyle.css';
+
+
 function Navigation() {
     return(
-        <>
+        <div className="Navi">
             <h3>여기에는 네비바가 들어갈 예정~!</h3>
-            <BrowserRouter>
+            {/* <BrowserRouter> */}
                     <Link to="/">
                         <button>산불 감지 현황</button>
                     </Link>
@@ -18,8 +21,8 @@ function Navigation() {
                     <Link to="/device">
                         <button>디바이스 등록</button>
                     </Link>
-            </BrowserRouter>
-        </>
+            {/* </BrowserRouter> */}
+        </div>
     );
 }
 
