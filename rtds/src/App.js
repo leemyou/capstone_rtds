@@ -4,7 +4,6 @@ import 조난자위치조회 from "./page/components/Victim";
 import 산불감지현황 from "./page/components/SensorLoc";
 import 센서정보조회 from "./page/components/SensorInfo";
 import 디바이스등록 from "./page/components/DeviceInsert";
-import Home from "./page/Home";
 import Navigation from "./page/components/Navigation";
 import './App.css';
 
