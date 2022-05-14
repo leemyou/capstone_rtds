@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<산불감지현황 />} />;
           <Route path="/victim" element={<조난자위치조회 />} />;
-          <Route path="/sensor_info/:time" element={<센서정보조회 />} />;
+          <Route path="/sensor_info" element={<센서정보조회 />} />;
           <Route path="/device" element={<디바이스등록 />} />;
         </Routes>
       </main>
