@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Victim() {
+export default function SensorLoc() {
     return (
         <>
             <h1>산불 감지 현황</h1>

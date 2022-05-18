@@ -3,12 +3,17 @@ const app = express();
 const port = 2999; // react의 기본값은 3000이니까 3000이 아닌 아무 수
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const db = require('./config/db');
+// const db = require('./config/db');
+
+//로그인 기능
+// const user_inform = require('./routes/user_inform');
 
 var corsOptions = {
     origin: 'https://localhost:3000'
 }
 
+//로그인
+app.use('/user_inform', user_inform);
 
 const mysql = require('mysql');
 //mysql 연결
