@@ -5,7 +5,10 @@ import { useState, useRef, useEffect } from "react";
 
 const Victim = () => {
     return (
-        <h1>1234</h1>
+        <>
+            <h1>조난자 위치 조회</h1>
+            <p>gps로 조난자의 현재 위치 표시 가능</p>
+        </>
     )
 //     const dotenv = require('dotenv');
 //     dotenv.config();

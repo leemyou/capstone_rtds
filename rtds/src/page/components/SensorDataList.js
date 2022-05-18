@@ -12,6 +12,7 @@ const SensorDataList = ({ totalInfos }) => {
                     {totalInfos.status}
                 </div>
                 
+                
                 )
             })}
             {/* {totalInfos.map(totalInfos =>{
