@@ -1,46 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 
 const SensorDataList = ({ totalInfos }) => {
 
-    // column 입력 (데이터 제목)
-    const columnData = [
-        { 
-            accessor: 'time',
-            Header: 'Time',
-        },
-        {
-            accessor: 'status',
-            Header: 'Status',
-        }
-    ]
-    const columns = useMemo(() => columnData, []);
-
-    // data 입력
-    // key name 과 column의 accessor와 같은 이름으로
-    const data = useMemo(() => [{
-        "time" : "2022-04-06 05:10:00",
-        "status" : "safe",
-    }])
-
-    // 객체 내 object 형태로 넘겨줌
-    const [info, setInfo] = useState();
-
-    const getSensorInfo = () => {
-        data.getSensorInfo().then(item => setInfo(item));
-    };
-    
-    // const data = useMemo(() => info, [info])
-
+    var date = totalInfos.time;
+    var time = totalInfos.time;
+    var status = totalInfos.status;
 
 
     return(
         <>
             {totalInfos.map(totalInfos => {
+                date = JSON.stringify(totalInfos.time);
+                time = JSON.stringify(totalInfos.time);
+                status = totalInfos.status;
+
+                date = date.substring(1,11);
+                time = time.substring(12, 20);
+
                 return(
                 <div key={totalInfos.time}>
-                    { totalInfos.time }
+                    날짜 : { date }<br/>
+                    시간 : { time }
                     <br/>
-                    {totalInfos.status}
+                    상태 : { status }
                     <hr></hr>
                 </div>
                 

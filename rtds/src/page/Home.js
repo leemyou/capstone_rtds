@@ -21,10 +21,10 @@ function Home() {
       <main>
 
         <Routes>
-          <Route path="/Home/Sensor_location" element={<산불감지현황 />} />;
-          <Route path="/Home/victim" element={<조난자위치조회 />} />;
-          <Route path="/Home/sensor_info" element={<센서정보조회 />} />;
-          <Route path="/Home/device" element={<디바이스등록 />} />;
+          <Route path="/Sensor_location" element={<산불감지현황 />} />;
+          <Route path="/victim" element={<조난자위치조회 />} />;
+          <Route path="/sensor_info" element={<센서정보조회 />} />;
+          <Route path="/device" element={<디바이스등록 />} />;
           <Route path='/' element={<로그인 />} />;
         </Routes>
 

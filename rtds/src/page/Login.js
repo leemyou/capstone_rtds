@@ -45,6 +45,10 @@ export default function Login() {
         setPw("");
     }
 
+    // const goToManager = () =>{
+    //     navigate("/home")
+    // }
+
 
 
     return (

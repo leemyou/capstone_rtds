@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import SensorDataList from './SensorDataList';
+import { Button } from 'react-bootstrap';
 
 
 function SensorInfo() {
@@ -22,11 +23,12 @@ function SensorInfo() {
 
     return(
         <>
-            <h1>데이터 불러오기!</h1>
-            <form onSubmit={ totalInfos}>
-                <button type = 'submit'>콘솔창에 찍어보기</button>
+            <h1>데이터 불러오기!!@</h1>
+            <form onSubmit={() => totalInfos}>
+                <Button type = 'submit' variant="primary">Primary</Button>{' '}
             </form>
             <SensorDataList totalInfos={totalInfos}/>
+
         </>
     )
 }
