@@ -25,3 +25,16 @@ section > .mb-3:first-child{
 .mb-3 > input {
     font-size: 20px;
 }
+
+section > .btn {
+    margin-left: 50px;
+    margin-top: 50px;
+    padding: 10px 25px;
+    font-size: 20px;
+    background-color: var(--btn-color);
+    border: 1px solid var(--btn-color);
+}
+section > .btn:hover {
+    background-color: #a45353;
+    border: 1px solid #a45353;
+}

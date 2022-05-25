@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import { Button } from 'react-bootstrap';
 import deviceStyle from "../../css/deviceStyle.css"
 
+//class가 아니라 함수로 다시 구현
 export default class DeviceInsert extends Component{
 
     state = { 
@@ -10,7 +11,7 @@ export default class DeviceInsert extends Component{
         u_birth : "",
         u_phone : "",
         u_addr : "",
-    }
+    } 
 
 
     // 현재 state를 바꿔줌
@@ -20,7 +21,7 @@ export default class DeviceInsert extends Component{
         });
     }
 
-
+//DB에 내용 전달
     onSubmit = ()=>{
         const post ={
             d_id : this.state.d_id,
@@ -46,6 +47,19 @@ export default class DeviceInsert extends Component{
             });
         });
     };
+
+    //버튼 리셋 기능
+    onReset = (e)=>{
+        this.setState({
+            //리셋기능 구현 필요
+            d_id: "",
+            u_name: "",
+            u_birth: "",
+            u_phone : "",
+            u_addr : "",
+            
+        })
+    }
 
 
     
@@ -92,8 +106,9 @@ export default class DeviceInsert extends Component{
 
                 <button className="btn btn-primary" type="submit" value="Submit"
                     onClick={ this.onSubmit }>등록</button>
-                {/* reset기능 구현해야함 */}
-                <button class="btn btn-primary" type="reset" value="Reset">취소</button>
+
+                <button class="btn btn-primary" type="reset" value="Reset"
+                    onClick={ this.onReset }>취소</button>
             </section>
         </div>
         )

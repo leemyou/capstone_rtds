@@ -21,22 +21,23 @@ function Navigation() {
                     <p>산불 감지 현황</p>
                 </button><br/>
             </Link>
+            <Link to="/sensor_info">
+                <button class="btn_nav">
+                    <ion-icon name="search-circle-outline" id="icon"></ion-icon>
+                    <p>산불 현황 조회</p>
+                </button><br/>
+            </Link>
             <Link to="/victim">
                 <button class="btn_nav">
                     <ion-icon name="location-outline" id="icon"></ion-icon>
                     <p>조난자 위치 조회</p>
                 </button><br/>
             </Link>
-            <Link to="/sensor_info">
-                <button class="btn_nav">
-                    <ion-icon name="search-circle-outline" id="icon"></ion-icon>
-                    <p>센서 정보 조회</p>
-                </button><br/>
-            </Link>
+
             <Link to="/device">
                 <button class="btn_nav">
                     <ion-icon name="person-add-outline" id="icon"></ion-icon>
-                    <p>디바이스 등록</p>
+                    <p>조난자 정보 등록</p>
                 </button><br/>
             </Link> 
             <Link to="/">

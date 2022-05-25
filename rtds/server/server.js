@@ -13,7 +13,7 @@ var corsOptions = {
 }
 
 //로그인
-app.use('/user_inform', user_inform);
+// app.use('/user_inform', user_inform);
 
 const mysql = require('mysql');
 //mysql 연결
