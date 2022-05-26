@@ -18,13 +18,13 @@ function Navigation() {
             <Link to="/sensor_location">
                 <button class="btn_nav">
                     <ion-icon name="flame-outline" id="icon"></ion-icon>
-                    <p>산불 감지 현황</p>
+                    <p>산불감지 현황</p>
                 </button><br/>
             </Link>
             <Link to="/sensor_info">
                 <button class="btn_nav">
                     <ion-icon name="search-circle-outline" id="icon"></ion-icon>
-                    <p>산불 현황 조회</p>
+                    <p>산불감지 센서 정보</p>
                 </button><br/>
             </Link>
             <Link to="/victim">

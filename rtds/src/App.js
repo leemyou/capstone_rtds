@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, {Component, useState} from "react";
 import { Link, Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import 조난자위치조회 from "./page/components/Victim";

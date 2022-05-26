@@ -81,6 +81,7 @@ app.get('/sensor_info', (req, res) => {
     // ============================================================
     // 나중에 where절 넣어서 조건으로 뽑아올 수 있게 해야함
     const sqlSelect = "SELECT * FROM sensor1"
+    // const sqlSelect = "SELECT * FROM sensor where {start}>=time and {end}<=time"
     
     // connection.connect((err) => {
     //     if(err) {
