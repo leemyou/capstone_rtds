@@ -1,11 +1,93 @@
 *{
-    /* width: 40%; */
-
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+    color: black;
 }
 
+:root {
+    --main-color: #C3A6A6;
+    --hover-color: #bd9a9a;
+    --btn-color: #CC7070;
+}
+
+
+/* 네비게이션 전체 기본 설정 */
 .Navi{
-    background-color: aquamarine;
+    background-color: var(--main-color);
     width: 20vw;
-    max-width: 300px;
+    max-width: 400px;
+    min-width: 300px;
     height: 100vh;
+    position: relative;
 }
+
+.Navi > h1{
+    font-size: 4em;
+    padding: 10px 0 0 25px;
+}
+
+.Navi > h4 {
+    padding-left : 20px;
+    
+}
+
+
+/* 버튼 설정 */
+.btn_nav,
+.btn_logout {
+    width: 100%;
+    height: 80px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    background-color: var(--main-color);
+
+    border: 0;
+    outline: 0;
+}
+
+ .btn_nav:hover {
+    background-color: var(--hover-color);
+}
+
+ .btn_nav > p,
+ .btn_logout > p{
+    text-align: center;
+    font-size: 1.5em;
+    padding-top: 15px;
+    padding-right: 30px;
+    font-weight: bold;
+}
+
+ .btn_nav > #icon,
+ .btn_logout > #icon{
+    font-size: 2em;
+    padding-left: 30px;
+}
+
+
+/* 로그아웃 버튼 */
+.btn_logout {
+    background-color: var(--btn-color);
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: 80%;
+    border-radius: 50px;
+    height: 60px;
+}
+.btn_logout > #icon {
+    margin-left: 10px;
+}
+.btn_logout > p {
+    margin-right: 20px;
+    font-weight: bold;
+}
+.btn_logout:hover {
+    background-color: #a45353;
+}
+

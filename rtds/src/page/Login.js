@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../css/loginStyle.css';
 
@@ -9,6 +10,7 @@ export default function Login() {
     const [id, setId] = useState("");
     const [pw, setPw] = useState("");
 
+    // id, pw의 input data의 변화를 state에 저장
     const onChangeId = e => {
         setId(e.target.value);
     }
@@ -16,8 +18,13 @@ export default function Login() {
         setPw(e.target.value);
     }
 
+    // 로그인 버튼 클릭 이벤트
     const loginCheck = () => {
         console.log('login')
+        console.log('ID : ', id);
+        console.log('PW : ', pw);
+        
+
         if(id === ''){
             alert('아이디를 입력해주세요');
             return false;
@@ -37,6 +44,10 @@ export default function Login() {
         setId("");
         setPw("");
     }
+
+    // const goToManager = () =>{
+    //     navigate("/home")
+    // }
 
 
 

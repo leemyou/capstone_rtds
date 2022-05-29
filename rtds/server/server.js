@@ -3,14 +3,20 @@ const app = express();
 const port = 2999; // react의 기본값은 3000이니까 3000이 아닌 아무 수
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const db = require('./config/db');
+// const db = require('./config/db');
+
+//로그인 기능
+// const user_inform = require('./routes/user_inform');
 
 var corsOptions = {
     origin: 'https://localhost:3000'
 }
 
+//로그인
+// app.use('/user_inform', user_inform);
 
 const mysql = require('mysql');
+const { Table } = require('react-bootstrap');
 //mysql 연결
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -75,23 +81,30 @@ app.post("/device", (req, res) =>{
 app.get('/sensor_info', (req, res) => {
     // ============================================================
     // 나중에 where절 넣어서 조건으로 뽑아올 수 있게 해야함
-    const sqlSelect = "SELECT * FROM sensor1"
-    
-    // connection.connect((err) => {
-    //     if(err) {
-    //         console.log(err);
-    //     }else{
+    // const sqlSelect = "SELECT * FROM sensor1"
+    // // const sqlSelect = "SELECT * FROM `sensor1` where ?>=`time` and ?<=`time`"   //between 사용할 수 있음 하자
+    // //전달받은 파라미터값
+    // const params = [req.query.start_t, req.query.end_t]
+
+    // // connection.connect((err) => {
+    // //     if(err) {
+    // //         console.log(err);
+    // //     }else{
     console.log('Connected');
-    connection.query(sqlSelect, 
-    (err, rows, fields) => {
-        if (err) {
-            console.log("데이터 가져오기 실패");
-        }else {
-            console.log(" 성공 ~!~!~! ");
-            res.send(rows);
-            // res.send(rows[0]);
-        }
-    })
+    // connection.query(sqlSelect, params,
+    // (err, rows, fields) => {
+    //     if (err) {
+    //         console.log("데이터 가져오기 실패");
+    //     }else {
+    //         console.log(" 성공 ~!~!~! ");
+    //         console.log(params.start);
+    //         res.send(rows);
+    //         // res.send(rows[0]);
+    //     }
+    // })
+    Table.findAll()
+        .then(resutl => {res.send(rows)})
+        .catch(err => {console.log(err)});
 })
 
 
