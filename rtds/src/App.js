@@ -6,6 +6,7 @@ import 조난자위치조회 from "./page/components/Victim";
 import 산불감지현황 from "./page/components/SensorLoc";
 import 센서정보조회 from "./page/components/SensorInfo";
 import 디바이스등록 from "./page/components/DeviceInsert";
+import Test from "./page/components/DateTest";
 import Home from "./page/Home";
 import Login from "./page/Login";
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/sensor_info" element={<센서정보조회 />} />;
           <Route path="/device" element={<디바이스등록 />} />;
           <Route path="/home" element={<Home />} />
+          <Route path="/test" element={<Test />} />;
           <Route path='/' element={<Login />} />;
         </Routes>
         

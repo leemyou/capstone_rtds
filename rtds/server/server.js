@@ -77,35 +77,29 @@ app.post("/device", (req, res) =>{
 
 
 //센서 정보 화면
-// 센서 정보를 화면에 뿌림 - select쿼리 사용
-app.get('/sensor_info', (req, res) => {
-    // ============================================================
-    // 나중에 where절 넣어서 조건으로 뽑아올 수 있게 해야함
-    // const sqlSelect = "SELECT * FROM sensor1"
-    // // const sqlSelect = "SELECT * FROM `sensor1` where ?>=`time` and ?<=`time`"   //between 사용할 수 있음 하자
+// 센서 정보를 가져옴 - select쿼리 사용
+app.post('/sensor_info', (req, res) => {
     // //전달받은 파라미터값
-    // const params = [req.query.start_t, req.query.end_t]
+    const startTime = req.body.start_t;
+    const endTime = req.body.end_t;
 
-    // // connection.connect((err) => {
-    // //     if(err) {
-    // //         console.log(err);
-    // //     }else{
+    const sqlSelect = "select * from sensor1 where time between '"+startTime+"' and '"+endTime+"';"   //between 사용할 수 있음 하자
+
     console.log('Connected');
-    // connection.query(sqlSelect, params,
-    // (err, rows, fields) => {
-    //     if (err) {
-    //         console.log("데이터 가져오기 실패");
-    //     }else {
-    //         console.log(" 성공 ~!~!~! ");
-    //         console.log(params.start);
-    //         res.send(rows);
-    //         // res.send(rows[0]);
-    //     }
-    // })
-    Table.findAll()
-        .then(resutl => {res.send(rows)})
-        .catch(err => {console.log(err)});
+    console.log(startTime);
+    console.log(endTime);
+    connection.query(sqlSelect,
+    (err, rows, fields) => {
+        if (err) {
+            console.log("데이터 가져오기 실패 또는 데이터 없음");
+        }else {
+            console.log(" 성공 ~!~!~! ");
+            console.log(rows);
+            res.send(rows);
+        }
+    })
 })
+
 
 
 

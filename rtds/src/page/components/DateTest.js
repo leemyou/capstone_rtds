@@ -6,8 +6,6 @@ import "react-datepicker/dist/react-datepicker.css"; 	// 데이트 피커 스타
 import format from 'date-fns/format'
 import styles from '../../css/datePickerStyle.module.css'
 
-import SensorDataList from "./SensorDataList";
-
 
 const DateTest = () => {
     // 시작 날짜 & 시작시간
@@ -16,9 +14,6 @@ const DateTest = () => {
     const [endDate, setEndDate] = useState(null);
     // 시작 시간을 선택했는지
     const [isSelected, setIsSelected] = useState(false);
-
-    // 데이터를 담을 객체
-    const [totalInfos, setTotalInfos] = useState(null);
 
     // 시작 시간이 선택되면 해당 시간 적용 및 isSelected를 true, endTime을 null로
     const onSelect = (date) => {
@@ -35,31 +30,16 @@ const DateTest = () => {
         alert(start_t);
         alert(end_t);
 
+        fetchDateTime();
     }
     
     const fetchDateTime = async() => {
-        setTotalInfos([]);
-        const response = axios.post('http://localhost:2999/sensor_info', {
+        const response = await axios('http://localhost:2999/sensor_info', {
             start_t: start_t,
             end_t: end_t
-        })
-        .then(response => {
-            setTotalInfos(response.data);
-            // console.log(response);
-            if(response.data = []){
-               alert("데이터가 없습니다")
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        })
-        console.log('fetch information');
+        });
+        console.log(response.data);
     }
-    useEffect(() => {
-        fetchDateTime();
-    }, []);
-
-
 
     return (
         <>
@@ -94,7 +74,7 @@ const DateTest = () => {
                     startDate,
                 ]}
                 timeCaption="Time"
-                dateFormat="h:mm 종료"
+                dateFormat="aa h:mm 종료"
                 placeholderText="종료 시간"
                 // className="mt-3"
             /></div>
@@ -102,9 +82,6 @@ const DateTest = () => {
             }
 
             <button type="submit" className="mt-5">시간 확인 버튼!</button>
-
-            <h1>데이터를 받아오겟읍니다</h1>
-            <SensorDataList totalInfos={ totalInfos }/>
 
         </form>
         </>
