@@ -61,7 +61,12 @@ const DateTest = () => {
 
 
 
+<<<<<<< HEAD
     return (
+=======
+    
+    return(
+>>>>>>> 5959ac8ea83068c8b3f49602796abb0f943cf074
         <>
         <form onSubmit={ onSubmit }>  {/*submit함수 넣어야함 */}
             {/* 첫번째 데이트피커 */}

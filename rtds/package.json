@@ -27,8 +27,12 @@
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
+<<<<<<< HEAD
+    "react-scripts": "^2.1.8",
+=======
     "react-scripts": "^2.1.3",
     "react-table": "^7.8.0",
+>>>>>>> eb6ba62adfd85705c9c1e5c96cc290d2999a3fce
     "web-vitals": "^2.1.4"
   },
   "scripts": {
