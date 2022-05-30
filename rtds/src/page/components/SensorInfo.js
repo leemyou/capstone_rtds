@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import moment from 'moment';
-import SDatePicker, { setMinutes, ko, setHours,getMinutes, getHours } from 'react-datepicker';
+import SDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"; 	// 데이트 피커 스타일
-import format from 'date-fns/format'
-import styles from '../../css/datePickerStyle.module.css'
 
 import SensorDataList from "./SensorDataList";
 
@@ -61,12 +59,7 @@ const DateTest = () => {
 
 
 
-<<<<<<< HEAD
     return (
-=======
-    
-    return(
->>>>>>> 5959ac8ea83068c8b3f49602796abb0f943cf074
         <>
         <form onSubmit={ onSubmit }>  {/*submit함수 넣어야함 */}
             {/* 첫번째 데이트피커 */}
