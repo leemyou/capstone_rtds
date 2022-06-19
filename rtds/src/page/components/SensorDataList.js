@@ -1,4 +1,6 @@
 import React from "react";
+import Table from 'react-bootstrap/Table';
+import styles from "../../css/Table.module.css";
 
 const SensorDataList = ({ totalInfos }) => {
 
@@ -13,22 +15,32 @@ const SensorDataList = ({ totalInfos }) => {
     return(
         <>
             { totalInfos && totalInfos.map(totalInfos => {
-                // date = JSON.stringify(totalInfos.time);
-                // time = JSON.stringify(totalInfos.time);
-                // status = totalInfos.status;
-
-                // date = date.substring(1,11);
-                // time = time.substring(12, 20);
 
                 return(
                 <div key={totalInfos.time}>
-                    시간: {totalInfos.time}
+                    {/* 시간: {totalInfos.time}
                     상태 : {totalInfos.status}
-                    {/* 날짜 : { date }<br/> */}
-                    {/* 시간 : { time } */}
                     <br/>
-                    {/* 상태 : { status } */}
-                    <hr></hr>
+                    <hr/> */}
+
+                    <Table striped bordered hover size="sm"  className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>날짜 / 시간</th>
+                            <th>상태</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td>상태</td>
+                            <td>{totalInfos.time}</td>
+                            <td>{totalInfos.status}</td>
+                        </tr>
+                        <tr>
+                        </tr>
+                      </tbody>
+                    </Table>
                 </div>
                 
                 

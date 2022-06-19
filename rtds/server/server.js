@@ -3,26 +3,21 @@ const app = express();
 const port = 2999; // react의 기본값은 3000이니까 3000이 아닌 아무 수
 const bodyParser = require('body-parser');
 const cors = require('cors');
-// const db = require('./config/db');
-
-//로그인 기능
-// const user_inform = require('./routes/user_inform');
 
 var corsOptions = {
-    origin: 'https://localhost:3000'
+    origin: 'http://localhost:3000'
 }
 
-//로그인
-// app.use('/user_inform', user_inform);
 
-const mysql = require('mysql');
-const { Table } = require('react-bootstrap');
+const maria = require('mysql');
 //mysql 연결
-var connection = mysql.createConnection({
-    host: 'localhost',
+var connection = maria.createConnection({
+    //서버 아이피 바뀔 때마다 바꿔줘야 함
+    host: '192.168.20.67',
+    port: 3306,
     user: 'root',
     password: '1234',
-    database: 'rtds',
+    database: 'capston',
 });
 connection.connect();
 
@@ -36,7 +31,7 @@ app.use(cors());
 
 // get 방식으로 서버에 들어가면 보여짐
 app.get('/', (req, res) =>{
-    res.send('!RTDS Server is running!!@#!@#!#!@#!@#!#!#!#!@');
+    res.send('!RTDS Server is running!');
 })
 
 
@@ -52,12 +47,8 @@ app.post("/device", (req, res) =>{
     const u_addr = req.body.u_addr;
 
     // DB insert query
-    let sql = "INSERT INTO userinfo (d_id, name, birth, phone, addr) VALUES (?, ?, ?, ?, ?);";
+    let sql = "INSERT INTO user_info (d_id, u_name, u_birth, u_phone, u_addr) VALUES (?, ?, ?, ?, ?);";
     
-    // connection.connect((err) => {
-    //     if (err) { console.log(err) }
-    //     else {
-    //         console.log("Connected");
     console.log("Connected");
     connection.query(sql, [d_id, u_name, u_birth, u_phone, u_addr],
             function(err, rows, fields){
@@ -66,7 +57,6 @@ app.post("/device", (req, res) =>{
                     console.log(err);
                 }else{
                     console.log("성공!");
-                    // console.log(fields);
                 }
             })
         }
@@ -105,7 +95,31 @@ app.post('/sensor_info', (req, res) => {
 
 
 
+// 실시간 조난자 위치 받아오기
+app.get('/victim', (req, res) => {
+    const sql = "SELECT * FROM `u_location` ORDER BY `count` DESC LIMIT 1;"   //between 사용할 수 있음 하자
+    
+    console.log('Connected');
+        connection.query(sql,
+            (err, rows) => {
+                if (err) {
+                    console.log("데이터 가져오기 실패 또는 데이터 없음");
+                }else {
+                    console.log(" 성공 ~!~!~! ");
+                    console.log(rows);
+                    res.send(rows);
+                }
+            }
+        )
+})
+
+
+
+
+
+
+
 // 서버가 실행되면 콘솔창에 안내
 app.listen(port, ()=>{
-    console.log(`Connect at http://localhost:${port}`); // '가 아닌 좌측상단의 esc버튼 밑의 `다.
+    console.log(`Connect at http://IP:${port}`); // '가 아닌 좌측상단의 esc버튼 밑의 `다.
 })

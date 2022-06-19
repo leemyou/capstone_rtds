@@ -3,6 +3,8 @@ import axios from 'axios';
 import moment from 'moment';
 import SDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"; 	// 데이트 피커 스타일
+import styles from '../../css/sensorInfo.module.css';
+import { Button } from 'react-bootstrap';
 
 import SensorDataList from "./SensorDataList";
 
@@ -32,20 +34,18 @@ const DateTest = () => {
         e.defaultPrevented = true;
         alert(start_t);
         alert(end_t);
-
     }
     
     const fetchDateTime = async() => {
         setTotalInfos([]);
-        const response = axios.post('http://localhost:2999/sensor_info', {
+        axios.post('http://localhost:2999/sensor_info', {
             start_t: start_t,
             end_t: end_t
         })
         .then(response => {
             setTotalInfos(response.data);
-            // console.log(response);
-            if(response.data = []){
-               alert("데이터가 없습니다")
+            if(response.data = null){
+                // alert("데이터가 없습니다")
             }
         })
         .catch(err => {
@@ -61,7 +61,9 @@ const DateTest = () => {
 
     return (
         <>
-        <form onSubmit={ onSubmit }>  {/*submit함수 넣어야함 */}
+        <h1 className={styles.title}>산불감지 센서 정보</h1>
+        <h4 className={styles.sub_title}>열감지 센서의 정보 조회</h4>
+        <form onSubmit={ onSubmit } className={styles.date_picker_wrap}>
             {/* 첫번째 데이트피커 */}
             <div><SDatePicker
                 selected = { startDate }
@@ -72,7 +74,7 @@ const DateTest = () => {
                 timeCaption="Time"
                 dateFormat="yyyy년 MM월 dd일 hh:mm 시작"
                 placeholderText="시작 시간"
-                className="mt-4"
+                className={`mt-4 ${styles.date_picker}`}
             /></div>
 
             {/* 두번째 데이트피커 */}
@@ -94,17 +96,17 @@ const DateTest = () => {
                 timeCaption="Time"
                 dateFormat="h:mm 종료"
                 placeholderText="종료 시간"
-                // className="mt-3"
+                className={`mt-4 ${styles.date_picker}`}
             /></div>
                 : null 
             }
 
-            <button type="submit" className="mt-5">시간 확인 버튼!</button>
-
-            <h1>데이터를 받아오겟읍니다</h1>
-            <SensorDataList totalInfos={ totalInfos }/>
 
         </form>
+        <Button type="submit" className={styles.btn} onClick={fetchDateTime}>시간 확인 버튼!</Button>
+
+        <SensorDataList totalInfos={ totalInfos } className={styles.table}/>
+
         </>
     );
 };

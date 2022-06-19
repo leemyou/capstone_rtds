@@ -1,92 +1,145 @@
 import React from 'react';
-import { useState, useRef, useEffect } from "react";
-// import styled from 'styled-components';
+
+import axios from 'axios';
+import { useState, useEffect } from "react";
+//css
+import styles from '../../css/victimMap.module.css'
+
+// global kakao
+import cn from "classnames";
+const { kakao } = window;
+
+
+
 
 
 
 const Victim = () => {
+
+    const [isChecked, setIsChecked] = useState(false);
+    const [lati, setLati] = useState(37.448284241644025);
+    const [long, setLong] = useState(126.65734050676225);
+    const [uName, setUName] = useState("NULL");
+
+
+    // 버튼을 누름 -> click 상태 바뀜
+    const clickedToggle = () => {
+        setIsChecked((prev) => !prev)
+    }
+
+    useEffect(() => {
+        var startInterval = setInterval(function() { 
+            if (isChecked) {
+                axios.get('http://localhost:2999/victim')
+                    .then(response => {
+                        setLati(response.data[0].latF)
+                        setLong(response.data[0].longF)
+                        setUName(response.data[0].u_name)
+                        if(response.data[0] = null){
+                            // alert("데이터가 없습니다")
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            } else{
+                console.log("정지");
+                clearInterval(startInterval);
+            }
+
+            
+        }, 1000);
+        
+        return () => clearInterval(startInterval);
+    }, [isChecked])
+
+
+
+    // 지도 API
+    useEffect(() => {
+        let container = document.getElementById("map");
+
+        let options = {
+            center: new window.kakao.maps.LatLng(lati, long),
+            level: 3,
+        };
+        let map = new window.kakao.maps.Map(container, options);
+
+        // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+    var positions = [
+        {
+            content: `<div>${uName}</div>`,
+            latlng: new kakao.maps.LatLng(lati, long),
+        },
+    ]
+    // ,selectedMarker = null;
+
+    for (var i = 0; i < positions.length; i++) {
+    // 마커를 생성하고 지도위에 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: positions[i].latlng
+        });
+
+        var infowindow = new kakao.maps.InfoWindow({
+            content: positions[i].content
+        })
+
+        kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    }
+
+
+    // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+    function makeOverListener(map, marker, infowindow) {
+        return function() {
+            infowindow.open(map, marker);
+        };
+    }
+
+    // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+    function makeOutListener(infowindow) {
+        return function() {
+            infowindow.close();
+        };
+    }
+
+    console.log("loding kakaoMap");
+
+}, [])
+
+
+
+
+
+
+
+
+
     return (
         <>
-            <h1>조난자 위치 조회</h1>
-            <p>gps로 조난자의 현재 위치 표시 가능</p>
+            {/* <h1>조난자 위치 조회</h1> */}
+            {/* <p>gps로 조난자의 현재 위치 표시 가능</p> */}
+            <div class={`form-check form-switch ${styles.btn_toggle_wrap}`} style={{position:'absolute', zIndex:10, }}>
+                {/* <label class="form-check-label" for="flexSwitchCheckDefault">사용자 위치 공유</label> */}
+                <input className={`form-check-input ${styles.btn_toggle}`} type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                    // onChange={ clickedToggle } 
+                    checked={ isChecked } onClick = {clickedToggle}
+                />
+            </div>
+
+            {/* <h4>토글 스위치: {isChecked ? "ON" : "OFF"}</h4> */}
+
+            <h3 style={{position:'absolute', zIndex:10, top: 10, left: 450}}>현재 위도: { lati }</h3><br/>
+            <h3 style={{position:'absolute', zIndex:10, top: 10, right: 100}}>현재 경도: { long }</h3>
+
+            <div className={cn("Map")}>
+                <div className={cn("MapContainer")} id="map" style={{width:'86vw', height: '100vh', position:'absolute', top:0, zIndex:1}}/>
+            </div>
+
         </>
     )
-//     const dotenv = require('dotenv');
-//     dotenv.config();
-
-//     const [kakaoMap, setKakaoMap] = useState(null);
-//     const container = useRef(null);
-    
-//     const initMap = () => {
-//       const center = new kakao.maps.LatLng(33.36256187769044, 126.52903781775196);
-//       const options = {
-//         center,
-//         level: 8,
-//       };
-//       const map = new kakao.maps.Map(container.current, options);
-//       setKakaoMap(map);
-//     };
-    
-//     useEffect(() => {
-//       initMap();
-//     }, []);
-    
-//     return <MapContainer id="KakaoMap" ref={container} />;
-//   }
-  
-//   const MapContainer = styled.div`
-//     width: 100%;
-//     height: 100vh;
-//   `;
-
-// export default function Victim() {
-
-//     // const { lat, lon } = ( 33.450701, 126.570667 )
-//     const { kakao } = window;
-    
-//     //지도 표시 함수
-//     useEffect(() => {
-//         const mapContainer = document.querySelector('.victim-map');
-//         const mapOption = {
-//             center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-//             level: 3 // 지도의 확대 레벨
-//         }
-//         const map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-//         //마커 표시 위치
-//         let position = new kakao.maps.LatLng(33.450701, 126.570667);
-
-//         // 마커 생성
-//         var marker = new kakao.maps.Marker({
-//             map: map,
-//             position: position,
-//             clilckable: true    //마커 클릭시 지도의 클릭 이벤트가 발생하지 않음
-//         });
-
-//         //인포 윈도우 설명
-//         var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-//             iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-//         // 인포 윈도우 생성
-//         var infowindow = new kakao.maps.InfoWindow({
-//             content : iwContent,
-//             removable : iwRemoveable
-//         });
-//         infowindow.open(map, marker);
-//         // 지도의 중심을 결과값으로 받은 위치
-//         map.setCenter(position)
-
-//         //마커에 클릭 이벤트 등록
-//         kakao.maps.event.addListener(marker, 'click', function(){
-//             //사용자 정보 화면으로 이동하는 코드
-//         })
-//     })
-//     return(
-//         <>
-//             <div className='victime-map'></div>
-//             console.log(lat, lon);
-//         </>
-        
-//     )
 }
 export default Victim;
+
+

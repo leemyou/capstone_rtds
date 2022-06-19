@@ -1,6 +1,5 @@
 import React, { Component} from 'react';
-import { Button } from 'react-bootstrap';
-import deviceStyle from "../../css/deviceStyle.css"
+import "../../css/deviceStyle.css"
 
 //class가 아니라 함수로 다시 구현
 export default class DeviceInsert extends Component{

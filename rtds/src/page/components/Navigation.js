@@ -1,12 +1,13 @@
-import React from "react";
-import { Link, BrowserRouter } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
-import navStyle from'../../css/navStyle.css';
+import '../../css/navStyle.css';
 
 
 function Navigation() {
 
     var manager = '임효현';
+    var [isClick, setClick] = useState("");
 
     return(
         <div className="Navi">
@@ -16,36 +17,35 @@ function Navigation() {
             <hr></hr>
 
             <Link to="/sensor_location">
-                <button class="btn_nav">
+                <button id="산불감지현황" onClick={(e) => {setClick(e.target); console.log(isClick)}}
+                    className={isClick === "<p>산불감지 현황</p>" ? "btn_clicked" : "btn_nav"}>
                     <ion-icon name="flame-outline" id="icon"></ion-icon>
                     <p>산불감지 현황</p>
                 </button><br/>
             </Link>
             <Link to="/sensor_info">
-                <button class="btn_nav">
+                <button id='산불감지센서정보'  onClick={(e) => {setClick(e.target); console.log(isClick)}}
+                className={isClick === "<p>산불감지 센서 정보</p>" ? "btn_clicked" : "btn_nav"}>
                     <ion-icon name="search-circle-outline" id="icon"></ion-icon>
                     <p>산불감지 센서 정보</p>
                 </button><br/>
             </Link>
             <Link to="/victim">
-                <button class="btn_nav">
+                <button id='조난자위치조회'  onClick={(e) => {setClick(e.target); console.log(isClick)}}
+                className={isClick === "<p>조난자 위치 조회</p>" ? "btn_clicked" : "btn_nav"}>
                     <ion-icon name="location-outline" id="icon"></ion-icon>
                     <p>조난자 위치 조회</p>
                 </button><br/>
             </Link>
 
             <Link to="/device">
-                <button class="btn_nav">
+                <button id='조난자정보등록'  onClick={(e) => {setClick(e.target); console.log(isClick)}}
+                className={isClick === "<p>조난자 정보 등록</p>" ? "btn_clicked" : "btn_nav"}>
                     <ion-icon name="person-add-outline" id="icon"></ion-icon>
                     <p>조난자 정보 등록</p>
                 </button><br/>
             </Link> 
-            <Link to="/">
-                <button className='btn_logout' href='.../Login.html'>
-                <ion-icon name="log-out-outline" id='icon'></ion-icon>
-                    <p>로그아웃</p>
-                </button><br/>
-            </Link>
+
 
         </div>
     );
